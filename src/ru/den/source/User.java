@@ -11,7 +11,7 @@ public class User {
  public User(String name, String passwords){
     this.UserName = name;
     CorrectPassword = PasswordCorrectnessCheck(passwords);
-    if (CorrectPassword){
+    if (CorrectPassword == true){
         this.UserPassword = passwords;
         System.out.println("Пароль принят");
         System.out.println("ользователь создан");
@@ -23,7 +23,7 @@ public class User {
 private boolean PasswordCorrectnessCheck(String userPassword){
      char[] ch = userPassword.toCharArray();
 
-     return true;
+     return CharacterCheck(ch);
 }
 
 private  boolean CharacterCheck(char [] ch){
