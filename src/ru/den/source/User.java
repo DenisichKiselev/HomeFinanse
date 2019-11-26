@@ -45,7 +45,7 @@ private  boolean CharacterCheck(char [] ch){
             }
         }
     }
-    if (a!=false & b!=false){
+    if (a!=false & b!=false & ch.length>=linePasswordMin&ch.length<=linePasswordMax){
         return true;
     } else return false;
 
