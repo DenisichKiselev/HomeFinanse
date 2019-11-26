@@ -1,25 +1,32 @@
 package ru.den.source;
 
 public class User {
-    String UserName="";
-    String UserPassword = "";
-    String Email = "name@example.com";
-    boolean CorrectPassword = false;
-    int linePasswordMin = 6;
-    int linePasswordMax = 10;
+    private  String UserName;
+    private String UserPassword ;
+    private String Email = "name@example.com";
+    private boolean CorrectPassword ;
+    private int linePasswordMin = 6;
+    private int linePasswordMax = 10;
 
  public User(String name, String passwords){
-    this.UserName = name;
+
+
+     this.UserName = name;
     CorrectPassword = PasswordCorrectnessCheck(passwords);
-    if (CorrectPassword == true){
+    if (CorrectPassword ){
         this.UserPassword = passwords;
         System.out.println("Пароль принят");
         System.out.println("ользователь создан");
-    } else System.out.println("Вы ввели некоректный пароль");
+    } else {
+        System.out.println("Вы ввели некоректный пароль");
+        System.out.println("Пароль должен содержать хотябы одну цифру и специальный символ: &,$,!,@,?,#,%,{,}");
+    }
 }
-//роверка пароля на соответствие определенным условиям
-    // если они верны то переменная CorrectPassword будет истина если нет ложь
-    // задача вывести пользователю  то что он ввел неправильный пароль, проверяем его и на длинну мин 6 символов максимум 10
+/*
+роверка пароля на соответствие определенным условиям
+     если они верны то переменная CorrectPassword будет истина если нет ложь
+     задача вывести пользователю  то что он ввел неправильный пароль, проверяем его и на длинну мин 6 символов максимум 10
+*/
 private boolean PasswordCorrectnessCheck(String userPassword){
      char[] ch = userPassword.toCharArray();
 
@@ -27,27 +34,25 @@ private boolean PasswordCorrectnessCheck(String userPassword){
 }
 
 private  boolean CharacterCheck(char [] ch){
-     char [] charSimvols = {'&','!','@', '?','#','%','{','}'};
+     char [] charSimvols = {'&','$','!','@', '?','#','%','{','}'};
      char [] charNums = {'0','1','2', '3','4','5','6','7', '8','9'};
      boolean a, b = false;
      a=false;
-    for (int i = 0; i < ch.length; i++) {
-        for (int j = 0; j <charSimvols.length ; j++) {
-            if(ch[i]==charSimvols[j]){
+    for (char c : ch) {
+        for (char charSimvol : charSimvols) {
+            if (c == charSimvol) {
                 b = true;
                 break;
             }
         }
-        for (int j = 0; j <charNums.length ; j++) {
-            if (ch[i]==charNums[j]){
+        for (char charNum : charNums) {
+            if (c == charNum) {
                 a = true;
                 break;
             }
         }
     }
-    if (a!=false & b!=false & ch.length>=linePasswordMin&ch.length<=linePasswordMax){
-        return true;
-    } else return false;
+    return a != false & b != false & ch.length >= linePasswordMin & ch.length <= linePasswordMax;
 
 }
 
